@@ -1,11 +1,13 @@
 import express from 'express'
 import dotenv from 'dotenv'
-import prisma from './prisma/client.js'
+import prisma from './src/lib/prisma.js'
+import errorHandler from './src/middleware/globalErrorHandler.js'
 
 dotenv.config()
 
 const app = express()
 app.use(express.json())
+app.use(errorHandler)
 
 // Test route - get all users
 app.get('/users', async (req, res) => {
